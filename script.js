@@ -78,4 +78,9 @@ function game(){
 }
 
 
+let playGameButton = document.querySelector('.btn');
+playGameButton.addEventListener("click", function(){
+    game();
+});
+
 game();
