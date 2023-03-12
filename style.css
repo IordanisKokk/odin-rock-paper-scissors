@@ -10,8 +10,8 @@ body {
 }
 
 h1, h2, h3{
-    padding: 10px;
-    margin: 5px;
+    /* padding: 10px;
+    margin: 5px; */
 }
 
 
@@ -23,13 +23,14 @@ h1, h2, h3{
 }
 
 .header-container {
-    margin: 20px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     text-align: center;
-    flex-basis: 250px;
+    flex-basis: 100px;
+    gap: 5px;
 }
 
 .winnerHeader{
@@ -124,4 +125,23 @@ h1, h2, h3{
     background-color: rgb(71, 71, 71);
     color: white;
     width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0px;
+}
+
+.footer p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 3px;
+    padding: 1px;
+}
+
+.footer a{
+    text-decoration: none;
+    color: rgb(252, 121, 121);
 }
