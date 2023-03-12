@@ -17,6 +17,11 @@ const headerContainer = document.querySelector('.header-container');
 const battleContainer = document.querySelector('.battleContainer');
 const roundContainer = document.querySelector('.roundContainer');
 
+const roundResults = document.querySelector('.results');
+const roundHeader = document.querySelector('.round');
+
+
+
 let roundNumber = 0;
 
 let userScore = 0;
@@ -47,7 +52,7 @@ function round(playerSelection, computerSelection) {
     roundNumber++;
     let roundWinner = null;
     let result;
-    
+
     if (playerSelection === computerSelection) {
         result = "Tie!";
     } else {
@@ -88,16 +93,16 @@ function checkIfGameIsFinished() {
         gameContainer.remove(rockButton);
         gameContainer.remove(paperButton);
         gameContainer.remove(scissorsButton);
-        roundContainer.remove();
+        roundContainer.replaceChildren();
         winnerHeader.classList.add('winnerHeader');
-        if(userScore === 5){
+        if (userScore === 5) {
             winnerHeader.textContent = 'YOU WIN!!!';
-        }else{
+        } else {
             winnerHeader.textContent = 'YOU LOSE!!! Try again';
         }
         headerContainer.replaceChildren(winnerHeader)
         headerContainer.append(header2);
-        
+
         headerContainer.append(startButton)
         userScore = 0;
         compScore = 0;
@@ -106,7 +111,7 @@ function checkIfGameIsFinished() {
 
 }
 
-function updateScoreBoard(){
+function updateScoreBoard() {
     header2.textContent = `SCORE: ${userScore} - ${compScore} `
 }
 
@@ -123,9 +128,8 @@ function getPlayersChoiceAndPlayRound(e) {
     checkIfGameIsFinished();
 }
 
-function renderRound(playerChoice, computerChoice, result){
+function renderRound(playerChoice, computerChoice, result) {
     let content = document.querySelector('.content');
-    content.appendChild(roundContainer);
     const playerImageWrapper = document.createElement('div');
     playerImageWrapper.classList.add('imagewrapper');
     playerImageWrapper.id = 'player';
@@ -134,7 +138,7 @@ function renderRound(playerChoice, computerChoice, result){
     compImageWrapper.classList.add('imagewrapper');
     compImageWrapper.id = 'comp';
 
-    const playerChoiceImage = new Image(100,100);
+    const playerChoiceImage = new Image(100, 100);
     playerChoiceImage.src = `resources/${playerChoice}.svg`;
     const playerHeader = document.createElement('h3');
     playerHeader.textContent = 'YOU';
@@ -144,7 +148,7 @@ function renderRound(playerChoice, computerChoice, result){
     playerImageWrapper.appendChild(playerChoiceImage);
     playerImageWrapper.appendChild(playerChoiceLabel);
 
-    const compChoiceImage = new Image(100,100);
+    const compChoiceImage = new Image(100, 100);
     compChoiceImage.src = `resources/${computerChoice}.svg`;
     const compHeader = document.createElement('h3');
     compHeader.textContent = 'COMP';
@@ -153,23 +157,25 @@ function renderRound(playerChoice, computerChoice, result){
     compImageWrapper.appendChild(compHeader);
     compImageWrapper.appendChild(compChoiceImage);
     compImageWrapper.appendChild(compChoiceLabel);
-    
+
     console.log(playerImageWrapper);
     console.log(battleContainer);
     console.log("HAS CHILD NODES: " + battleContainer.hasChildNodes())
-    
-    if(battleContainer.firstElementChild === null){
+
+    if (battleContainer.firstElementChild === null) {
         battleContainer.appendChild(playerImageWrapper);
         battleContainer.appendChild(compImageWrapper);
         console.log(battleContainer.firstElementChild);
-    }else{
+    } else {
         battleContainer.replaceChildren(playerImageWrapper, compImageWrapper);
     }
 
-    const roundResults = document.querySelector('.results');
+    roundContainer.appendChild(roundHeader);
+    roundContainer.appendChild(battleContainer);
+    roundContainer.appendChild(roundResults);
+
     roundResults.textContent = result;
 
-    const roundHeader = document.querySelector('.round');
     roundHeader.textContent = `ROUND ${roundNumber}`
 
 
@@ -184,7 +190,7 @@ function renderButtons() {
     paperButton.id = 'paper';
     scissorsButton.id = 'scissors';
 
-    if(roundNumber === 0){
+    if (roundNumber === 0) {
         let i = 0;
         buttons.forEach(button => {
             button.src = btnImages[i];
@@ -192,13 +198,13 @@ function renderButtons() {
             gameContainer.appendChild(button);
             i++
         });
-    
+
         buttons.forEach(button => {
             button.addEventListener('click', getPlayersChoiceAndPlayRound)
         });
     }
-    else{
-        buttons.forEach(button =>{
+    else {
+        buttons.forEach(button => {
             gameContainer.appendChild(button);
         });
     }
@@ -206,13 +212,14 @@ function renderButtons() {
 
 }
 
-startButton.addEventListener("click",  () =>{
+startButton.addEventListener("click", () => {
     console.log('button clicked')
     header1.textContent = 'PLAYING ROCK, PAPER, SCISSORS!!!';
 
-    if(headerContainer.firstElementChild === winnerHeader){
+    if (headerContainer.firstElementChild === winnerHeader) {
         headerContainer.replaceChild(header1, winnerHeader);
         let content = document.querySelector('.content');
+        content.appendChild(roundContainer);
         content.appendChild(gameContainer);
     }
 

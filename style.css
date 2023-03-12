@@ -38,7 +38,7 @@ h1, h2, h3{
 }
 
 .gamecontainer{
-    margin: 20px;
+    /* margin: 20px; */
     display: flex;
     gap: 20px;
     justify-content: center;
@@ -90,12 +90,13 @@ h1, h2, h3{
 }
 
 .battleContainer{
-    margin: 20px;
+    /* margin: 10px; */
     display: flex;
     gap: 20px;
     justify-content: center;
     align-items: center;
     text-align: center;
+    flex-basis: 200px;
 }
 
 .imagewrapper {
@@ -114,6 +115,7 @@ h1, h2, h3{
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    flex-basis: 350px;
 }
 
 .results{
